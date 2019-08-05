@@ -19,39 +19,13 @@
                             <textarea id="textarea1" class="materialize-textarea"></textarea>
                             
                         </div>
-                        <input type="submit" class="btn blue darken-2" value="Post" disabled>
+                        <input type="submit" id="submit" class="btn blue darken-2" value="Post">
                     </form>
                 </div><!--card-->
 
                 <div id="note-container">
-                    <div class="card-panel note">
-                            <i class="small material-icons right action">delete</i>
-                            <i class="small material-icons right action">edit</i>
-                        <h5>Fatma Mohammed</h5>
-                        <small><i class="tiny material-icons">query_builder</i>5:00pm</small>
-                    </div>
-                </div><!--note box-->
-
-
-                <div id="note-container">
-                    <div class="card-panel note">
-                            <i class="small material-icons right action">delete</i>
-                            <i class="small material-icons right action">edit</i>
-                        <h5>Fatma Mohammed</h5>
-                        <small><i class="tiny material-icons">query_builder</i>5:00pm</small>
-                    </div>
-                </div><!--note box-->
-               
-                <div id="note-container">
-                    <div class="card-panel note">
-                            <i class="small material-icons right action">delete</i>
-                            <i class="small material-icons right action">edit</i>
-                        <h5>Fatma Mohammed</h5>
-                        <small><i class="tiny material-icons">query_builder</i>5:00pm</small>
-                    </div>
-                </div><!--note box-->
-
-
+                    
+                </div><!--note container-->
 
 
             </div><!--col-->
@@ -60,6 +34,30 @@
 
     <script src="js/materialize.min.js"></script>
     <script src="js/jquery-3.4.1.min.js"></script>
+    <script> 
+//    $("#textarea1").change(function(){
+//     if($(this).val())
+//     {
+//         $("#submit").removeAttr('disabled');
+//     }
+//    })
+   
+//    $("#submit").click(function(){
+    $(document).ready(function(){
+        var text=$("#textarea1").val();
+
+        $.get("server.php",
+    {
+        t:text
+    }).done(function(data)
+    {
+       $("#note-container").html(data);
+       //$("#textarea1").val("");
+    })
+    }) 
+   
+    
+    </script>
 </body>
 </html>
 
