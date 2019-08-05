@@ -1,0 +1,7 @@
+#note-container .note .action{
+    color: #bbb;
+    cursor: pointer;
+}
+#note-container .note .action:hover{
+    color: rgb(77, 75, 75);
+}
