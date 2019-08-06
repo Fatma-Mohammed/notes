@@ -42,8 +42,8 @@
 //     }
 //    })
    
-//    $("#submit").click(function(){
-    $(document).ready(function(){
+   var post=function(){
+    // $(document).ready(function(){
         var text=$("#textarea1").val();
 
         $.get("server.php",
@@ -54,9 +54,14 @@
        $("#note-container").html(data);
        //$("#textarea1").val("");
     })
-    }) 
-   
-    
+    } 
+   $("#submit").click(post())
+   $(document).ready(post()) 
+    //prevent the page from reloading when pressing submit
+   $("form").submit(function(a){
+       a.preventDefault();
+   })
+  
     </script>
 </body>
 </html>
