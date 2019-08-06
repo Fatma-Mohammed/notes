@@ -19,7 +19,7 @@
                             <textarea id="textarea1" class="materialize-textarea"></textarea>
                             
                         </div>
-                        <input type="submit" id="submit" class="btn blue darken-2" value="Post">
+                        <input type="submit" id="submit" class="btn blue darken-2" value="Post" disabled>
                     </form>
                 </div><!--card-->
 
@@ -35,12 +35,15 @@
     <script src="js/materialize.min.js"></script>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script> 
-//    $("#textarea1").change(function(){
-//     if($(this).val())
-//     {
-//         $("#submit").removeAttr('disabled');
-//     }
-//    })
+   $("#textarea1").keyup(function(){
+    if($(this).val())
+    {
+        $("#submit").removeAttr('disabled');
+    }
+    else{
+        $("#submit").attr('disabled',true);
+    }
+   })
    
    var post=function(){
     // $(document).ready(function(){
