@@ -46,20 +46,30 @@
     }
    })
    
-   var post=function(requestType){
-        var text=$("#textarea1").val();
-        var user="Fatma Mohammed";
-        if(requestType == undefined)
-        {
-            requestType = "";
-        }
+   var post=function(requestType , id){
+          var text=$("#textarea1").val();
+          var user="Fatma Mohammed";
+          if(requestType == undefined && id == undefined )
+            {
+                requestType = "";
+            }else if(id == undefined){
+                id='';
+            }else if(requestType == "del"){
+                var a = window.confirm("are you sure you want to delete this?");
+                if(a == false)
+                {
+                    id='';
+                }
+            }
        // window.alert(requestType);
 
         $.get("server.php",
     {
         t:text,
         u:user,
+        d:id,
         req:requestType
+        
     }).done(function(data)
     {
        $("#note-container").html(data);
@@ -68,15 +78,9 @@
     }
 
 
-    $(document).ready(post());
-    //calling the post funcrion from the submit buttom with preventing the ready document from invoking it
-    // $(function(){
-    //     var type = "add"
-    //     $("#postNote").click(function(){
-    //         post(type);
-    //     });
-    // })    
-   
+    $(document).ready(post);
+
+    //calling the post funcrion from the submit buttom with preventing the ready document from invoking it 
    $("#postNote").click(function(){
        var type = "add";
        post(type);
