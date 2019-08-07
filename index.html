@@ -19,7 +19,7 @@
                             <textarea id="textarea1" class="materialize-textarea"></textarea>
                             
                         </div>
-                        <input type="submit" id="submit" class="btn blue darken-2" value="Post" disabled>
+                        <input type="submit" id="postNote" class="btn blue darken-2" value="Post" disabled>
                     </form>
                 </div><!--card-->
 
@@ -39,28 +39,49 @@
    $("#textarea1").keyup(function(){
     if($(this).val())
     {
-        $("#submit").removeAttr('disabled');
+        $("#postNote").removeAttr('disabled');
     }
     else{
-        $("#submit").attr('disabled',true);
+        $("#postNote").attr('disabled',true);
     }
    })
    
-   var post=function(){
-    // $(document).ready(function(){
+   var post=function(requestType){
         var text=$("#textarea1").val();
+        var user="Fatma Mohammed";
+        if(requestType == undefined)
+        {
+            requestType = "";
+        }
+       // window.alert(requestType);
 
         $.get("server.php",
     {
-        t:text
+        t:text,
+        u:user,
+        req:requestType
     }).done(function(data)
     {
        $("#note-container").html(data);
-       //$("#textarea1").val("");
+       $("#textarea1").val("");
     })
-    } 
-   $("#submit").click(post())
-   $(document).ready(post()) 
+    }
+
+
+    $(document).ready(post());
+    //calling the post funcrion from the submit buttom with preventing the ready document from invoking it
+    // $(function(){
+    //     var type = "add"
+    //     $("#postNote").click(function(){
+    //         post(type);
+    //     });
+    // })    
+   
+   $("#postNote").click(function(){
+       var type = "add";
+       post(type);
+   })
+   
     //prevent the page from reloading when pressing submit
    $("form").submit(function(a){
        a.preventDefault();

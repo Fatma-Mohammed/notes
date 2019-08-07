@@ -1,8 +1,23 @@
 <?php 
 include_once("db.php");
-$sel = "SELECT * FROM note ORDER BY id DESC";
-$run = mysqli_query($con,$sel);
-while($row=mysqli_fetch_assoc($run)){
+$text=$_REQUEST['t'];
+$user=$_REQUEST['u'];
+$request=$_REQUEST['req'];
+
+
+
+if($request != ""){
+    if($request == "add")
+    {
+        $ins="INSERT INTO note (user, noteText) VALUES ('$user', '$text')";
+        mysqli_query($con,$ins);
+    }
+}
+    $sel = "SELECT * FROM note ORDER BY id DESC";
+    $run = mysqli_query($con,$sel);
+    while($row=mysqli_fetch_assoc($run)){
+
+   
 
 ?>
 
@@ -15,5 +30,5 @@ while($row=mysqli_fetch_assoc($run)){
     <?php echo $row["noteText"] ?>
 </div>
 <?php
-}
+        }
 ?>
