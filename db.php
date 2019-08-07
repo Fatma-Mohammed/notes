@@ -4,7 +4,7 @@ $username = 'root';
 $password ='';
 $db_name = 'notes';
 
-// $con = mysqli_connect($localhost,$username,$password,$db_name);
+$con = mysqli_connect($localhost,$username,$password,$db_name);
 // if($con){
 //     echo "done";
 // }
