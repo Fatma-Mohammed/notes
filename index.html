@@ -32,9 +32,30 @@
         </div><!--row-->
     </div> <!--container-->
 
-    <script src="js/materialize.min.js"></script>
+ <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+    </div>
+
+
     <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/materialize.min.js"></script>
     <script> 
+
+$(document).ready(function(){
+    $('.modal').modal();
+    $("#note-container").on("click","#editBtn",function(){
+    $('#modal1').modal('open');
+
+    })
+  });
+
     //when u type in the text area the button get enabled once u stop typing
    $("#textarea1").keyup(function(){
     if($(this).val())
@@ -89,7 +110,8 @@
     //prevent the page from reloading when pressing submit
    $("form").submit(function(a){
        a.preventDefault();
-   })
+   });
+
   
     </script>
 </body>

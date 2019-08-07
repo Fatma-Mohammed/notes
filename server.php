@@ -35,7 +35,7 @@ while($row=mysqli_fetch_assoc($run)){
 
 <div class="card-panel note">
     <i class="small material-icons right action" onclick= "post('del',<?php echo $row['id']?>)">delete</i>
-    <i class="small material-icons right action">edit</i>
+    <i class="small material-icons right action" id="editBtn">edit</i>
     <h5><?php echo $row["user"] ?></h5>
     <small><i class="tiny material-icons">query_builder</i><?php echo $row["time"]?></small><br>
     <?php echo $row["noteText"] ?>
