@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Notes Post</title>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="css/materialize.min.css">
-<link rel="stylesheet" href="css/style.css">
+    <title>Notes Post</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
+
 <body class="blue lighten-1 ">
     <div class="container">
         <div class="row">
@@ -17,127 +19,131 @@
                         <div class="input-field">
                             <label for="textarea1">Write here!</label>
                             <textarea id="textarea1" class="materialize-textarea"></textarea>
-                            
+
                         </div>
                         <input type="submit" id="postNote" class="btn blue darken-2" value="Post" disabled>
                     </form>
-                </div><!--card-->
+                </div>
+                <!--card-->
 
                 <div id="note-container">
-                    
-                </div><!--note container-->
+
+                </div>
+                <!--note container-->
 
 
-            </div><!--col-->
-        </div><!--row-->
-    </div> <!--container-->
+            </div>
+            <!--col-->
+        </div>
+        <!--row-->
+    </div>
+    <!--container-->
 
- <!-- Modal Structure -->
+    <!-- Modal Structure -->
     <div id="modal1" class="modal">
         <div class="modal-content">
             <form>
                 <div class="input-field">
                     <textarea id="textarea2" class="materialize-textarea" autofocus></textarea>
-                            
+
                 </div>
                 <input type="hidden" id="note-id">
             </form>
         </div>
         <div class="modal-footer">
-                <input type="submit" id="edit-postNote" class="btn blue darken-2 modal-close" value="Edit" >
+            <input type="submit" id="edit-postNote" class="btn blue darken-2 modal-close" value="Edit">
 
-                <a href="#!" class="modal-close waves-effect btn blue darken-2">Cancel</a>
+            <a href="#!" class="modal-close waves-effect btn blue darken-2">Cancel</a>
         </div>
     </div>
 
 
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/materialize.min.js"></script>
-    <script> 
+    <script>
 
-$(document).ready(function(){
-    $('.modal').modal();
-    $("#note-container").on("click","#editBtn",function(){
-    $('#modal1').modal('open');
-    $("#note-id").val($(this).data("id"));
-    $("#textarea2").val($(this).siblings("p").text());
-    })
-  });
+        $(document).ready(function () {
+            $('.modal').modal();
+            $("#note-container").on("click", "#editBtn", function () {
+                $('#modal1').modal('open');
+                $("#note-id").val($(this).data("id"));
+                $("#textarea2").val($(this).siblings("p").text());
+            })
+        });
 
-    //when u type in the text area the button get enabled once u stop typing
-   $("#textarea1").keyup(function(){
-    if($(this).val())
-    {
-        $("#postNote").removeAttr('disabled');
-    }
-    else{
-        $("#postNote").attr('disabled',true);
-    }
-   })
-   
-   var post=function(requestType , id){
-          var text=$("#textarea1").val();
-          var user="Fatma Mohammed";
-          if(requestType == undefined && id == undefined )
-            {
+        //when u type in the text area the button get enabled once u stop typing
+        $("#textarea1").keyup(function () {
+            if ($(this).val()) {
+                $("#postNote").removeAttr('disabled');
+            }
+            else {
+                $("#postNote").attr('disabled', true);
+            }
+        })
+
+        var post = function (requestType, id) {
+            var text = $("#textarea1").val();
+            var user = "Fatma Mohammed";
+            if (requestType == undefined && id == undefined) {
                 requestType = "";
             }
-            
-            else if(id == undefined && requestType != "edit" ){
-                id='';
-            }
-            else if(requestType == "del"){
-                var a = window.confirm("are you sure you want to delete this?");
-                if(a == false)
-                {
-                    id='';
-                }    
-            }
-            else if(requestType == "edit" && id == undefined  ){
-                // alert("edit");
-                id='';
+
+            else if (id == undefined ) {
+                id = '';
+                if (requestType == "edit") {
                 text = $("#textarea2").val();
-                id=$("#note-id").val();
+                id = $("#note-id").val();
             }
+            }
+            else if (requestType == "del") {
+                var a = window.confirm("are you sure you want to delete this?");
+                if (a == false) {
+                    id = '';
+                }
+            }
+            // else if (requestType == "edit") {
+            //     // alert("edit");
+            //     id = '';
+            //     text = $("#textarea2").val();
+            //     id = $("#note-id").val();
+            // }
 
-       // window.alert(requestType);
+            // window.alert(requestType);
 
-        $.get("server.php",
-    {
-        t:text,
-        u:user,
-        d:id,
-        req:requestType
-        
-    }).done(function(data)
-    {
-       $("#note-container").html(data);
-       $("#textarea1").val("");
-    })
-    }
+            $.get("server.php",
+                {
+                    t: text,
+                    u: user,
+                    d: id,
+                    req: requestType
+
+                }).done(function (data) {
+                    $("#note-container").html(data);
+                    $("#textarea1").val("");
+                })
+        }
 
 
-    $(document).ready(post);
+        $(document).ready(post);
 
-    //calling the post funcrion from the submit buttom with preventing the ready document from invoking it 
-   $("#postNote").click(function(){
-       var type = "add";
-       post(type);
-   })
-   $("#edit-postNote").click(function(){
-       var type = "edit";
-       post(type);
-   })
-   
-   
-    //prevent the page from reloading when pressing submit
-   $("form").submit(function(a){
-       a.preventDefault();
-   });
+        //calling the post funcrion from the submit buttom with preventing the ready document from invoking it 
+        $("#postNote").click(function () {
+            var type = "add";
+            post(type);
+        })
+        $("#edit-postNote").click(function () {
+            var type = "edit";
+            post(type);
+        })
 
-  
+
+        //prevent the page from reloading when pressing submit
+        $("form").submit(function (a) {
+            a.preventDefault();
+        });
+
+
     </script>
 </body>
+
 </html>
-
-
