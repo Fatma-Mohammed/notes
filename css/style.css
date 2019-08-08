@@ -5,3 +5,6 @@
 #note-container .note .action:hover{
     color: rgb(77, 75, 75);
 }
+.modal .modal-footer #edit-postNote{
+    width: 150px;
+}
